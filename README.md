@@ -4,16 +4,12 @@
 ```sh
 git clone https://github.com/sean94011/Moleculenet.git
 
-cd Moleculenet
-
-sh setup.sh
+sh Moleculenet/setup.sh
 ```
 
 ## Run Deepchem
 ```sh
-cd Moleculenet/deepchem
-
-python ecoli.py
+python <path/to/Moleculenet/deepchem/ecoli.py>
 ```
 
 ## Run Chemprop
