@@ -27,3 +27,7 @@ python hyperparameter_optimization.py --data_path </path/to/Moleculenet/data/eco
 
 python train.py --data_path </path/to/Moleculenet/data/ecoli.csv> --dataset_type classification --config_path config_ecoli
 ```
+* Prediction on Library with Trained Model
+```sh
+python predict.py --test_path <data/ecoli.csv> --checkpoint_dir <ecoli_checkpoints> --preds_path <ecoli_preds.csv>
+```
