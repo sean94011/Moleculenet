@@ -83,7 +83,7 @@ train_dataset, valid_dataset, test_dataset = ecoli_datasets
 
 n_tasks = len(ecoli_tasks)
 model = GraphConvModel(n_tasks, batch_size=50, mode='classification')
-
+batch_size=50
 from deepchem.metrics import to_one_hot
 from deepchem.feat.mol_graphs import ConvMol
 
