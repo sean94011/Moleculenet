@@ -13,15 +13,15 @@ python <path/to/Moleculenet/deepchem/ecoli.py>
 ```
 
 ## Run Chemprop
-* Go to Chemprop
+* Go to Chemprop and activate the environment
 ```sh
 cd <path/to/chemprop>
 
-source activate chemprop
+source/conda activate chemprop
 ```
 * Directly Train
 ```sh
-python train.py --data_path </path/to/Moleculenet/data/ecoli.csv> --dataset_type classification --save_dir ecoli_checkpoints
+python train.py --data_path </path/to/Moleculenet/data/ecoli.csv> --dataset_type classification --save_dir ecoli_checkpoints --class_balance
 ```
 * Hyperparameter Optimization First and then Train
 ```sh
