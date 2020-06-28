@@ -1,16 +1,30 @@
 # install miniconda & deepchem-gpu 2.3
 
+echo 'Installing Miniconda'
+
 wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 chmod +x Miniconda3-latest-Linux-x86_64.sh
 
 sudo bash ./Miniconda3-latest-Linux-x86_64.sh -b -f -p /usr/local
 
+echo ' '
+
+echo 'Installing Deepchem'
+
 sudo conda install -y -c deepchem -c rdkit -c conda-forge -c omnia deepchem-gpu=2.3.0
+
+echo ' '
+
+echo 'Downgrading scikit-learn to version 0.22'
 
 pip instal scikit-learn==0.22
 
 # install CUDA 9.2
+
+echo ' '
+
+echo 'Installing CUDA 9.2'
 
 curl -O https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
 
@@ -36,14 +50,24 @@ nvidia-smi
 
 # install pytorch GPU
 
+echo ' '
+
+echo 'Installing Pytorch GPU'
+
 sudo conda install pytorch torchvision cudatoolkit=9.2 -c pytorch
 
 # install chemprop
+
+echo ' '
+
+echo 'Installing Chemprop'
 
 git clone https://github.com/chemprop/chemprop.git
 
 cd chemprop
 
 sudo conda env create -f environment.yml
+
+echo 'Activating Chemprop Environment'
 
 source activate chemprop
