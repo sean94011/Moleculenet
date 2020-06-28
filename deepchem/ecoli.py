@@ -90,7 +90,7 @@ import numpy as np
 #metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
 
 for i in range(num_epochs):
-    metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
+    #metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
     loss = model.fit(train_dataset, nb_epoch=1)
     print("Epoch %d loss: %f" % (i, loss))
     losses.append(loss)
@@ -104,6 +104,6 @@ for i in range(num_epochs):
     print(" ")
 
 test_predictions = model.predict(test_dataset)
-for i in range(1):
+for i in range(n_tasks):
     tp, fp, threshold = metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
     print('TPR: ', tp, '\nFPR: ', fp, '\n')    
