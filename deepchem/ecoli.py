@@ -102,6 +102,7 @@ for i in range(num_epochs):
     print("Test ROC-AUC Score: %f" % test_scores["mean-roc_auc_score"])
     print(" ")
 
-for i in range(12):
-    tp, fp, threshold = sklearn.metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
+test_predictions = model.predict(test_dataset)
+for i in range(1):
+    tp, fp, threshold = metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
     print(tp)    
