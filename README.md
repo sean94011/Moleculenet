@@ -19,7 +19,7 @@ cd <path/to/chemprop>
 
 source/conda activate chemprop
 ```
-* Directly Train
+* Directly Train with Class Balancing
 ```sh
 python train.py --data_path </path/to/Moleculenet/data/ecoli.csv> --dataset_type classification --save_dir ecoli_checkpoints --class_balance
 ```
