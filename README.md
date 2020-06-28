@@ -1,6 +1,6 @@
 # Moleculenet
 
-##Installation & Setup
+Installation & Setup
 
 ```sh
 git clone https://github.com/sean94011/Moleculenet.git
