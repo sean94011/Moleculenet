@@ -3,6 +3,7 @@ import logging
 import deepchem as dc
 from deepchem.models.graph_models import GraphConvModel
 from deepchem.utils import download_url
+import roc_curve
 
 logger = logging.getLogger(__name__)
 ECOLI_URL = 'https://raw.githubusercontent.com/yangkevin2/coronavirus_data/master/data/ecoli.csv'
@@ -100,3 +101,7 @@ for i in range(num_epochs):
     test_scores = model.evaluate(test_dataset, [metric], transformers)
     print("Test ROC-AUC Score: %f" % test_scores["mean-roc_auc_score"])
     print(" ")
+
+for i in range(12):
+    tp, fp, threshold = roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
+    print(tp)    
