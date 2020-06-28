@@ -105,4 +105,4 @@ for i in range(num_epochs):
 test_predictions = model.predict(test_dataset)
 for i in range(1):
     tp, fp, threshold = metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
-    print(tp)    
+    print('TPR: ', tp, '\nFPR: ', fp, '\n')    
