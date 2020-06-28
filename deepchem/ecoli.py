@@ -90,10 +90,11 @@ import numpy as np
 #metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
 
 for i in range(num_epochs):
-    #metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
     loss = model.fit(train_dataset, nb_epoch=1)
     print("Epoch %d loss: %f" % (i, loss))
     losses.append(loss)
+
+    metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
     print("Evaluating model")
     train_scores = model.evaluate(train_dataset, [metric], transformers)
     print("Training ROC-AUC Score: %f" % train_scores["mean-roc_auc_score"])
@@ -105,5 +106,5 @@ for i in range(num_epochs):
 
 test_predictions = model.predict(test_dataset)
 for i in range(n_tasks):
-    tp, fp, threshold = metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
+    tp, fp, threshold = sklearn.metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
     print('TPR: ', tp, '\nFPR: ', fp, '\n')    
