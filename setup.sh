@@ -68,6 +68,6 @@ cd chemprop
 
 sudo conda env create -f environment.yml
 
-echo 'Activating Chemprop Environment'
+echo ' '
 
-source activate chemprop
+echo 'Setup Successfully!'
