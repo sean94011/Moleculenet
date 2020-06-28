@@ -84,6 +84,22 @@ train_dataset, valid_dataset, test_dataset = ecoli_datasets
 n_tasks = len(ecoli_tasks)
 model = GraphConvModel(n_tasks, batch_size=50, mode='classification')
 
+from deepchem.metrics import to_one_hot
+from deepchem.feat.mol_graphs import ConvMol
+
+def data_generator(dataset, epochs=1, predict=False, pad_batches=True):
+  for epoch in range(epochs):
+    for ind, (X_b, y_b, w_b, ids_b) in enumerate(
+        dataset.iterbatches(
+            batch_size, pad_batches=pad_batches, deterministic=True)):
+      multiConvMol = ConvMol.agglomerate_mols(X_b)
+      inputs = [multiConvMol.get_atom_features(), multiConvMol.deg_slice, np.array(multiConvMol.membership)]
+      for i in range(1, len(multiConvMol.get_deg_adjacency_lists())):
+        inputs.append(multiConvMol.get_deg_adjacency_lists()[i])
+      labels = [to_one_hot(y_b.flatten(), 2).reshape(-1, n_tasks, 2)]
+      weights = [w_b]
+      yield (inputs, labels, weights)
+
 def reshape_y_pred(y_true, y_pred):
     """
     GraphConv always pads batches, so we need to remove the predictions
