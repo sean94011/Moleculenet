@@ -36,7 +36,7 @@ nvidia-smi
 
 # install pytorch GPU
 
-conda install pytorch torchvision cudatoolkit=9.2 -c pytorch
+sudo conda install pytorch torchvision cudatoolkit=9.2 -c pytorch
 
 # install chemprop
 
@@ -44,6 +44,6 @@ git clone https://github.com/chemprop/chemprop.git
 
 cd chemprop
 
-conda env create -f environment.yml
+sudo conda env create -f environment.yml
 
 source activate chemprop
