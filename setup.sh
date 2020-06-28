@@ -50,14 +50,6 @@ source ~/.bashrc
 
 nvidia-smi
 
-# install pytorch GPU
-
-echo ' '
-echo 'Installing Pytorch GPU'
-echo ' '
-
-sudo conda install pytorch torchvision cudatoolkit=9.2 -c pytorch
-
 # install chemprop
 
 echo ' '
@@ -70,6 +62,15 @@ cd chemprop
 
 sudo conda env create -f environment.yml
 
+# Install pytorch GPU
+
 echo ' '
-echo 'Setup Successfully!'
+echo 'Installing Pytorch GPU'
+echo ' '
+
+sudo conda install pytorch torchvision cudatoolkit=9.2 -c pytorch
+
+# Finish
+echo ' '
+echo 'Everything Installed Successfully!'
 echo ' '
