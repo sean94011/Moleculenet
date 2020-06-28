@@ -3,7 +3,7 @@ import logging
 import deepchem as dc
 from deepchem.models.graph_models import GraphConvModel
 from deepchem.utils import download_url
-import roc_curve
+import sklearn.metrics as metrics
 
 logger = logging.getLogger(__name__)
 ECOLI_URL = 'https://raw.githubusercontent.com/yangkevin2/coronavirus_data/master/data/ecoli.csv'
@@ -103,5 +103,5 @@ for i in range(num_epochs):
     print(" ")
 
 for i in range(12):
-    tp, fp, threshold = roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
+    tp, fp, threshold = metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
     print(tp)    
