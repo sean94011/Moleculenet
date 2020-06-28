@@ -84,25 +84,42 @@ train_dataset, valid_dataset, test_dataset = ecoli_datasets
 n_tasks = len(ecoli_tasks)
 model = GraphConvModel(n_tasks, batch_size=50, mode='classification')
 
+def reshape_y_pred(y_true, y_pred):
+    """
+    GraphConv always pads batches, so we need to remove the predictions
+    for the padding samples.  Also, it outputs two values for each task
+    (probabilities of positive and negative), but we only want the positive
+    probability.
+    """
+    n_samples = len(y_true)
+    return y_pred[:n_samples, :, 1]
+
 num_epochs = 30
 losses = []
 import numpy as np
-metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
 
 for i in range(num_epochs):
+    metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
     loss = model.fit(train_dataset, nb_epoch=1)
     print("Epoch %d loss: %f" % (i, loss))
     losses.append(loss)
     print("Evaluating model")
-    train_scores = model.evaluate(train_dataset, [metric], transformers)
+    train_predictions = model.predict_on_generator(data_generator(train_dataset, predict=True))
+    train_predictions = reshape_y_pred(train_dataset.y, train_predictions)
+    train_scores = metric.compute_metric(train_dataset.y, train_predictions, train_dataset.w)
     print("Training ROC-AUC Score: %f" % train_scores["mean-roc_auc_score"])
-    valid_scores = model.evaluate(valid_dataset, [metric], transformers)
+
+    valid_predictions = model.predict_on_generator(data_generator(valid_dataset, predict=True))
+    valid_predictions = reshape_y_pred(valid_dataset.y, valid_predictions)
+    valid_scores = metric.compute_metric(valid_dataset.y, valid_predictions, valid_dataset.w)
     print("Validation ROC-AUC Score: %f" % valid_scores["mean-roc_auc_score"])
-    test_scores = model.evaluate(test_dataset, [metric], transformers)
+
+    test_predictions = model.predict_on_generator(data_generator(test_dataset, predict=True))
+    test_predictions = reshape_y_pred(test_dataset.y, test_predictions)
+    test_scores = metric.compute_metric(test_dataset.y, test_predictions, test_dataset.w)
     print("Test ROC-AUC Score: %f" % test_scores["mean-roc_auc_score"])
     print(" ")
 
-test_predictions = model.predict(test_dataset)
 for i in range(1):
     tp, fp, threshold = metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
     print('TPR: ', tp, '\nFPR: ', fp, '\n')    
