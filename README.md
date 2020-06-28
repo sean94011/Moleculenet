@@ -4,19 +4,25 @@
 ```sh
 git clone https://github.com/sean94011/Moleculenet.git
 
-cd <path/to/setup.sh>
+cd Moleculenet
 
 sh setup.sh
 ```
 
 ## Run Deepchem
 ```sh
-cd deepchem
+cd Moleculenet/deepchem
 
 python ecoli.py
 ```
 
 ## Run Chemprop
+* Go to Chemprop
+```sh
+cd <path/to/chemprop>
+
+source activate chemprop
+```
 * Directly Train
 ```sh
 python train.py --data_path </path/to/Moleculenet/data/ecoli.csv> --dataset_type classification --save_dir ecoli_checkpoints
@@ -29,5 +35,5 @@ python train.py --data_path </path/to/Moleculenet/data/ecoli.csv> --dataset_type
 ```
 * Prediction on Library with Trained Model
 ```sh
-python predict.py --test_path <data/ecoli.csv> --checkpoint_dir <ecoli_checkpoints> --preds_path <ecoli_preds.csv>
+python predict.py --test_path <path/to/library> --checkpoint_dir ecoli_checkpoints --preds_path ecoli_preds.csv
 ```
