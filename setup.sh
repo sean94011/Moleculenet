@@ -20,7 +20,7 @@ echo ' '
 echo 'Downgrading scikit-learn to version 0.22'
 echo ' '
 
-pip instal scikit-learn==0.22
+pip install scikit-learn==0.22
 
 # install CUDA 9.2
 
