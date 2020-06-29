@@ -1,4 +1,4 @@
-# Moleculenet
+# Y2 Lab AI Group: Moleculenet
 
 ## Installation & Setup
 ```sh
