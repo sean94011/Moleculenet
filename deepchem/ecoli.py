@@ -106,5 +106,5 @@ for i in range(num_epochs):
 
 test_predictions = model.predict(test_dataset)
 for i in range(n_tasks):
-    tp, fp, threshold = sklearn.metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,0])
+    tp, fp, threshold = sklearn.metrics.roc_curve(test_dataset.y[:,i], test_predictions[:,i,1])
     print('TPR: ', tp, '\nFPR: ', fp, '\n')    
