@@ -81,7 +81,7 @@ sars_tasks, sars_datasets, transformers = load_sars(featurizer='GraphConv', relo
 train_dataset, valid_dataset, test_dataset = sars_datasets
 
 
-n_tasks = len(sarsw_tasks)
+n_tasks = len(sars_tasks)
 model = GraphConvModel(n_tasks, batch_size=50, mode='classification')
 
 num_epochs = 30
