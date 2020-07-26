@@ -84,7 +84,7 @@ train_dataset, valid_dataset, test_dataset = sars_datasets
 n_tasks = len(sars_tasks)
 model = GraphConvModel(n_tasks, batch_size=50, mode='classification', model_dir="Moleculenet/deepchem")
 
-num_epochs = 30
+num_epochs = 3
 losses = []
 import numpy as np
 #metric = dc.metrics.Metric(dc.metrics.roc_auc_score, np.mean)
