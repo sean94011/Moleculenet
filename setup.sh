@@ -70,6 +70,12 @@ cd chemprop
 
 sudo conda env create -f environment.yml
 
+source activate chemprop
+
+pip install -e .
+
+source deactivate
+
 # Finish
 echo ' '
 echo 'Everything Installed Successfully!'
